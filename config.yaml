@@ -1,0 +1,17 @@
+openai_api_key: 'YOUR_OPENAI_API_KEY'
+aws_access_key_id: 'YOUR_AWS_ACCESS_KEY_ID'
+aws_secret_access_key: 'YOUR_AWS_SECRET_ACCESS_KEY'
+aws_region: 'us-east-1'
+
+models:
+  gpt4:
+    enabled: true
+  claude:
+    enabled: true
+  llama:
+    enabled: true
+
+prompt_template: |
+  {prompt}
+
+  Choose the best answer from the options A, B, C, or D. Provide only the letter of your choice.
