@@ -1,7 +1,7 @@
 import boto3
 import json
 
-class Llama:
+class Mistral7b:
     def __init__(self, config):
         self.client = boto3.client(
             'bedrock-runtime',
@@ -9,7 +9,7 @@ class Llama:
             aws_secret_access_key=config['aws_secret_access_key'],
             region_name=config['aws_region']
         )
-        self.model_id = 'meta.llama2-70b-chat-v1'
+        self.model_id = 'mistral.mistral-7b-instruct-v0:2'
 
     def generate(self, prompt):
         body = json.dumps({
@@ -24,10 +24,11 @@ class Llama:
             body=body
         )
         
-        response_body = b''
+        full_response = ""
         for event in response['body']:
             chunk = event['chunk']['bytes']
-            response_body += chunk
-            
-        result = json.loads(response_body.decode('utf-8'))
-        return result['completion']
+            chunk_json = json.loads(chunk.decode('utf-8'))
+            if 'outputs' in chunk_json:
+                full_response += chunk_json['outputs'][0]['text']
+        
+        return full_response
