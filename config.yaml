@@ -8,8 +8,13 @@ models:
     enabled: true
   claude:
     enabled: true
-  llama:
+  llama-3-70b:
     enabled: true
+  llama-3-8b:
+    enabled: true
+  mistral7b:
+    enabled: true
+  
 
 prompt_template: |
   {prompt}
